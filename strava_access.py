@@ -93,24 +93,6 @@ class DownloadData():
 
 
 
-
-
-
-
-    
-# # %% --------------------------------------------------------------------------
-# # Saving json
-# # -----------------------------------------------------------------------------
-# file_path = rf"assets/activities.json"
-
-# # Create the directory if it doesn't exist
-# os.makedirs(os.path.dirname(file_path), exist_ok=True)
-
-# with open(file_path, 'w') as json_file:
-#     json.dump(all_activities, json_file)
-
-
-
 # # %% --------------------------------------------------------------------------
 # # New Activities
 # # -----------------------------------------------------------------------------
