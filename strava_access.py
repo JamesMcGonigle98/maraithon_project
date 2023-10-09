@@ -23,7 +23,7 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
 # %% --------------------------------------------------------------------------
-# Downloading Info Class
+# Downloading Data
 # -----------------------------------------------------------------------------
 class DownloadData():
 
@@ -90,103 +90,3 @@ class DownloadData():
         with open(file_path, 'w') as self.json_file:
             json.dump(self.all_activities, self.json_file)
 
-
-
-
-# # %% --------------------------------------------------------------------------
-# # New Activities
-# # -----------------------------------------------------------------------------
-# rows_list = []
-
-# # Loop through the activities
-# for activity in all_activities:
-#     try:
-#         new_row = {
-#             'name': activity['name'],
-#             'distance': activity['distance'],
-#             'moving_time': activity['moving_time'],
-#             'total_elevation_gain': activity['total_elevation_gain'],
-#             'type': activity['sport_type'],
-#             'start_date': activity['start_date']
-#         }
-#         rows_list.append(new_row)
-#     except KeyError:
-#         # Handle missing keys or continue
-#         continue
-
-# activities_df = pd.DataFrame(rows_list)
-
-
-
-# # %% --------------------------------------------------------------------------
-# # Formatting of Dataframe
-# # -----------------------------------------------------------------------------
-# activities_df = activities_df.sort_values('start_date', ascending=True)
-
-# activities_df['start_date'] = activities_df['start_date'].str[:10] # Reformat Start Dates
-# activities_df['month'] = activities_df['start_date'].str[5:7] # Reformat Start Dates
-
-# activities_df['type'] = activities_df['type'].replace('Soccer', 'Workout') # Change Soccer to Workout
-
-# running_df = activities_df[activities_df['type']=='Run'] # Split between Running and Workout
-# workout_df = activities_df[activities_df['type']=='Workout'] # Split between Running and Workout
-
-
-
-# # %% --------------------------------------------------------------------------
-# # Aggregate by Month
-# # -----------------------------------------------------------------------------
-# aggregated_running_df = running_df.groupby('month').agg({
-#     'moving_time': 'sum',
-#     'distance': 'sum'
-# }).reset_index()
-
-# aggregated_workout_df = workout_df.groupby('month').agg({
-#     'moving_time': 'sum',
-#     'distance': 'sum'
-# }).reset_index()
-
-
-
-# # %% --------------------------------------------------------------------------
-# # Plots
-# # -----------------------------------------------------------------------------
-# import matplotlib.pyplot as plt
-
-# agg_comb = aggregated_workout_df.merge(aggregated_running_df, on='month', how='outer')
-# agg_comb = agg_comb.fillna(0)
-# agg_comb = agg_comb.sort_values('month')
-# agg_comb['moving_time_x'] = agg_comb['moving_time_x']/60
-# agg_comb['moving_time_y'] = agg_comb['moving_time_y']/60
-
-# agg_comb['total_time'] = agg_comb['moving_time_x'] + agg_comb['moving_time_y']
-
-
-# month_dict = {
-#     '04': 'April',
-#     '05': 'May',
-#     '06': 'June',
-#     '07': 'July',
-#     '08': 'August',
-#     '09': 'September'
-# }
-
-# # Replace numeric month values with string representation
-# agg_comb['month'] = agg_comb['month'].replace(month_dict)
-
-# x = agg_comb["month"]
-# y1 = agg_comb["moving_time_x"]
-# y2 = agg_comb["moving_time_y"]
-# y3 = agg_comb["total_time"]
-
-# plt.plot(x, y1, label = "Time Spend Doing Non-Running Training")
-# plt.plot(x, y2, label = "Time Spent Running")
-# plt.plot(x, y3, linestyle=':', label = "Total Time Training")
-# plt.legend()
-# plt.title('Comparison of Running to Non-Running Training')
-# plt.xlabel('Month')
-# plt.ylabel('Time Spend Exercising (Minutes)')
-# plt.legend(fontsize='small')
-# plt.ylim(0, 700)
-
-# # %%
