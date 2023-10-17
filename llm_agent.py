@@ -61,3 +61,5 @@ model = create_pandas_dataframe_agent(
     max_iterations=3)
 
 
+
+# %%
